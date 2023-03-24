@@ -29,10 +29,11 @@ class App extends Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
       <div style={wrapperStyle}>
         <Section title="Please leave feedback">
-          <FeedbackOptions 
+          <FeedbackOptions
             options={['Good', 'Neutral', 'Bad']}
             onLeaveFeedback={this.onLeaveFeedback}
           />
@@ -40,9 +41,9 @@ class App extends Component {
         <Section title="Statistics">
           {this.countTotalFeedback() !== 0 ? (
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()}
             />
@@ -68,4 +69,3 @@ const wrapperStyle = {
   fontSize: 40,
   color: '#010101',
 };
-
