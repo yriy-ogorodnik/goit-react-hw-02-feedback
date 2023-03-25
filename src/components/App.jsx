@@ -18,23 +18,19 @@ class App extends Component {
     return Math.round((this.state.good / this.countTotalFeedback()) * 100);
   };
   onLeaveFeedback = e => {
-    console.log('App  e:', e);
-    if (e === 'Good') {
-      this.setState({ good: this.state.good + 1 });
-    } else if (e === 'Neutral') {
-      this.setState({ neutral: this.state.neutral + 1 });
-    } else if (e === 'Bad') {
-      this.setState({ bad: this.state.bad + 1 });
-    }
+    this.setState(prevState => {
+      return { [e]: prevState[e] + 1 };
+    });
   };
 
   render() {
     const { good, neutral, bad } = this.state;
+
     return (
       <div style={wrapperStyle}>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['Good', 'Neutral', 'Bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
